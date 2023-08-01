@@ -21,7 +21,7 @@ def deal(player, deck):
     player.hand.append(next_card(deck))
     print(f"{player.name}, your current hand is {player.hand}")
 
-# Check if total hand is greater than 21
+# Check if total hand is greater than 2
 def over_21(player):
     total = 0
     for card in player.hand:
@@ -57,4 +57,3 @@ def blackjack():
 # ex: python my_card_game.py
 if __name__ == "__main__":
     blackjack()
-
