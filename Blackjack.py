@@ -4,15 +4,6 @@
 # Import statements
 from card import Card
 
-# Program your game here!
-def blackjack():
-    p1 = Player(input("What is your name?", [], 1000))
-    deck = Card.new_deck()
-    hit_or_stand(p1, deck)
-    over_21(p1)
-    
-
-
 # Create the player class
 class Player():
     def __init__(self, name, hand, score):
@@ -25,28 +16,42 @@ def next_card(deck):
     deck.pop(0)
     return deck[0]
 
-# Deal a card
+# Deal a card and state the player's hand
 def deal(player, deck):
     player.hand.append(next_card(deck))
+    print(f"{player.name}, your current hand is {player.hand}")
 
 # Check if total hand is greater than 21
 def over_21(player):
     total = 0
     for card in player.hand:
         total = total + card.value
-    return (total > 21)
+    return (total > 21) # If the total hand is greater than 21, function will return True
+
+def checkBust(player):
+    if over_21(player):
+        print("You bust!")
 
 # Ask whether a player wants to hit or stand, and act accordingly
 def hit_or_stand(player, deck):
     while True:
-        input = input(player.name + ", do you want to hit or stand?")
-        if input.lower() == "hit" or "h":
+        user = input(player.name + ", do you want to hit or stand? ")
+        if user.lower() == "hit" or "h":
             deal(player,deck)
             return
-        elif input.lower() == "stand" or "s":
+        elif user.lower() == "stand" or "s":
             return
         else:
             print("Invalid input, please try again")
+
+# Program your game here!
+def blackjack():
+    p1name = input("Enter you name: ")
+    p1 = Player(p1name, [], 1000)
+    deck = Card.new_deck()
+    while True:
+        hit_or_stand(p1, deck)
+        checkBust(p1)
 
 # Code that runs when script is called from terminal
 # ex: python my_card_game.py
