@@ -97,7 +97,7 @@ def blackjack():
         # Ask player for their bet
         print(f"You have ${p1.points}")
         wager = bet(p1, deck)
-        print(f"You are betting ${wager} in thsi game")
+        print(f"You are betting ${wager} in this game")
         print(f"You have ${p1.points} left, good luck")
 
         deal(dealer, deck)
