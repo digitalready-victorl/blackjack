@@ -54,6 +54,7 @@ def aceFix(player):
 def checkBust(player):
     if over_21(player):
         print("You bust!")
+        quit() # Maybe remove this later?
 
 # Ask whether a player wants to hit or stand, and act accordingly
 def hit_or_stand(player, deck):
@@ -90,10 +91,23 @@ def blackjack():
         checkBust(p1)
 
         if user == "stand": # If the user returns stand, compare it to the dealer
-            deal(dealer,deck)
+            while handTotal(dealer) <= 16: # If the dealer has a total less than 16, they draw
+                deal(dealer, deck)
+            
+            displayCards(dealer)
             if handTotal(dealer) > handTotal(p1):
                 print("Dealer wins!")
                 return
+            elif handTotal(dealer) == handTotal(p1):
+                numberDealer = 0
+                for card in dealer.hand:
+                    numberDealer += 1
+                numberP1 = 0
+                for card in p1.hand:
+                    numberP1 += 1
+                if numberDealer < numberP1:
+                    print(f"Dealer wins!")
+
             else:
                 print(f"{p1.name} wins!")
                 return
